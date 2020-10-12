@@ -1,11 +1,12 @@
-const readFile = require("../utils/read-file.js");
-const path = require("path");
-const jsonDataPath = path.join(__dirname, "..", "data", "users.json");
+const path = require('path');
+const readFile = require('../utils/read-file.js');
+
+const jsonDataPath = path.join(__dirname, '..', 'data', 'users.json');
 
 const getUsers = (req, res) => {
   readFile(jsonDataPath)
     .then((data) => res.send(data))
-    .catch(() => res.status(500).send({ message: "Произошла ошибка" }));
+    .catch(() => res.status(500).send({ message: 'Произошла ошибка' }));
 };
 
 const getUser = (req, res) => {
@@ -17,11 +18,11 @@ const getUser = (req, res) => {
     })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "Нет пользователя с таким id" });
+        return res.status(404).send({ message: 'Нет пользователя с таким id' });
       }
-      res.send(user);
+      return res.send(user);
     })
-    .catch(() => res.status(500).send({ message: "Произошла ошибка" }));
+    .catch(() => res.status(500).send({ message: 'Произошла ошибка' }));
 };
 
 module.exports = {
