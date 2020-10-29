@@ -12,7 +12,8 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return /https?:\/\/(w{3,3}\.)?\S+\.([a-z]{2,3})\S*/.test(v);
+        // eslint-disable-next-line no-useless-escape
+        return /^https?:\/\/(www\.)?[\w-.~:\/?#\[\]@!$&'()*+,;=]+#?$/gi.test(v);
       },
       message: 'Необходимо ввести верный url',
     },
@@ -22,14 +23,13 @@ const cardSchema = new mongoose.Schema({
     required: true,
     ref: 'user',
   },
-  likes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+  likes: {
     default: [],
-  }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+  },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 
