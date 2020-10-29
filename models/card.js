@@ -12,8 +12,7 @@ const cardSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        // eslint-disable-next-line no-useless-escape
-        return /^https?:\/\/(www\.)?[\w-.~:\/?#\[\]@!$&'()*+,;=]+#?$/gi.test(v);
+        return /^https?:\/\/(www\.)?[\w-.~:/?#[\]@!$&'()*+,;=]+#?$/gi.test(v);
       },
       message: 'Необходимо ввести верный url',
     },
